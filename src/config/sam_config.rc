@@ -1,0 +1,100 @@
+#include <windows.h>
+#include <commctrl.h>
+#include "sam_config_ids.h"
+
+// Common Controls v6, so the spin controls behave and the dialog is themed.
+1 RT_MANIFEST "sam_config.manifest"
+
+IDI_APP ICON "sam.ico"
+
+// Each entry control is immediately preceded in the template by its label, so
+// MSAA/screen readers pair the two automatically. Every interactive control has
+// WS_TABSTOP and a keyboard mnemonic.
+IDD_SETTINGS DIALOGEX 0, 0, 340, 330
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "SAM Voice Settings"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Voice:", IDC_VOICE_LABEL, 10, 10, 60, 10
+    COMBOBOX        IDC_VOICE, 74, 8, 180, 200,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP | WS_GROUP
+
+    GROUPBOX        "Voice parameters", IDC_GROUP_VOICE, 8, 28, 324, 106
+
+    LTEXT           "&Pitch (0 to 255, lower is higher pitched):", IDC_PITCH_LABEL,
+                    16, 42, 190, 10
+    EDITTEXT        IDC_PITCH, 240, 40, 46, 13, ES_AUTOHSCROLL | ES_NUMBER | WS_TABSTOP
+    CONTROL         "", IDC_PITCH_SPIN, UPDOWN_CLASS,
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,
+                    286, 40, 11, 13
+
+    LTEXT           "&Speed (1 to 255, lower is faster):", IDC_SPEED_LABEL,
+                    16, 60, 190, 10
+    EDITTEXT        IDC_SPEED, 240, 58, 46, 13, ES_AUTOHSCROLL | ES_NUMBER | WS_TABSTOP
+    CONTROL         "", IDC_SPEED_SPIN, UPDOWN_CLASS,
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,
+                    286, 58, 11, 13
+
+    LTEXT           "&Mouth (0 to 255):", IDC_MOUTH_LABEL, 16, 78, 190, 10
+    EDITTEXT        IDC_MOUTH, 240, 76, 46, 13, ES_AUTOHSCROLL | ES_NUMBER | WS_TABSTOP
+    CONTROL         "", IDC_MOUTH_SPIN, UPDOWN_CLASS,
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,
+                    286, 76, 11, 13
+
+    LTEXT           "&Throat (0 to 255):", IDC_THROAT_LABEL, 16, 96, 190, 10
+    EDITTEXT        IDC_THROAT, 240, 94, 46, 13, ES_AUTOHSCROLL | ES_NUMBER | WS_TABSTOP
+    CONTROL         "", IDC_THROAT_SPIN, UPDOWN_CLASS,
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,
+                    286, 94, 11, 13
+
+    LTEXT           "&Inflection (0 monotone to 100 dramatic):", IDC_INFLECTION_LABEL,
+                    16, 114, 190, 10
+    EDITTEXT        IDC_INFLECTION, 240, 112, 46, 13, ES_AUTOHSCROLL | ES_NUMBER | WS_TABSTOP
+    CONTROL         "", IDC_INFLECTION_SPIN, UPDOWN_CLASS,
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,
+                    286, 112, 11, 13
+
+    AUTOCHECKBOX    "Si&ng mode (hold pitch steady)", IDC_SINGMODE,
+                    16, 132, 200, 12, WS_TABSTOP
+
+    GROUPBOX        "Settings for all voices", IDC_GROUP_GLOBAL, 8, 150, 324, 88
+
+    LTEXT           "V&olume (0 to 100):", IDC_VOLUME_LABEL, 16, 164, 190, 10
+    EDITTEXT        IDC_VOLUME, 240, 162, 46, 13, ES_AUTOHSCROLL | ES_NUMBER | WS_TABSTOP
+    CONTROL         "", IDC_VOLUME_SPIN, UPDOWN_CLASS,
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,
+                    286, 162, 11, 13
+
+    LTEXT           "Speed at slo&west rate (SAPI rate minus 10):", IDC_SLOWEST_LABEL,
+                    16, 182, 190, 10
+    EDITTEXT        IDC_SLOWEST, 240, 180, 46, 13, ES_AUTOHSCROLL | ES_NUMBER | WS_TABSTOP
+    CONTROL         "", IDC_SLOWEST_SPIN, UPDOWN_CLASS,
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,
+                    286, 180, 11, 13
+
+    LTEXT           "Speed at &fastest rate (SAPI rate plus 10):", IDC_FASTEST_LABEL,
+                    16, 200, 190, 10
+    EDITTEXT        IDC_FASTEST, 240, 198, 46, 13, ES_AUTOHSCROLL | ES_NUMBER | WS_TABSTOP
+    CONTROL         "", IDC_FASTEST_SPIN, UPDOWN_CLASS,
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,
+                    286, 198, 11, 13
+
+    AUTOCHECKBOX    "Read n&umbers as words", IDC_EXPAND_NUMBERS,
+                    16, 218, 130, 12, WS_TABSTOP
+    LTEXT           "Lo&g detail:", IDC_LOGLEVEL_LABEL, 152, 219, 50, 10
+    COMBOBOX        IDC_LOGLEVEL, 206, 217, 90, 120,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    GROUPBOX        "Try it", IDC_GROUP_TEST, 8, 242, 324, 36
+    LTEXT           "Test &phrase:", IDC_TESTTEXT_LABEL, 16, 258, 48, 10
+    EDITTEXT        IDC_TESTTEXT, 68, 256, 152, 14, ES_AUTOHSCROLL | WS_TABSTOP
+    PUSHBUTTON      "S&peak", IDC_TEST, 226, 256, 46, 14, WS_TABSTOP
+    PUSHBUTTON      "S&top", IDC_STOP, 278, 256, 46, 14, WS_TABSTOP
+
+    PUSHBUTTON      "&Reset this voice", IDC_RESET_VOICE, 8, 284, 72, 14, WS_TABSTOP
+    PUSHBUTTON      "Reset &all voices", IDC_RESET_ALL, 84, 284, 68, 14, WS_TABSTOP
+    PUSHBUTTON      "Open log fol&der", IDC_OPEN_LOGS, 156, 284, 66, 14, WS_TABSTOP
+    DEFPUSHBUTTON   "&Close", IDOK, 278, 284, 46, 14, WS_TABSTOP
+
+    LTEXT           "", IDC_STATUS, 8, 304, 324, 20, SS_LEFTNOWORDWRAP | SS_NOPREFIX
+END

@@ -1,0 +1,13 @@
+# Normalise to LF in the repository so diffs stay honest across machines.
+* text=auto eol=lf
+
+# These must keep CRLF on disk to run correctly on Windows.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.iss text eol=crlf
+
+# Binary assets.
+*.ico binary
+
+# The pronunciation dictionary is large and plain text; never try to diff it.
+bin/cmudict.txt -diff
