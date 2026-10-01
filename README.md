@@ -262,8 +262,24 @@ Only a byte-exact comparison catches that.
   it credited differently or removed, please open an issue.
 - `bin/cmudict.txt` is the **CMU Pronouncing Dictionary**, from Carnegie Mellon
   University, which is freely redistributable.
-- The C++ engine, SAPI5 driver, settings utility, installer and tests in this
-  repository were written for this project.
+- The COM and SAPI plumbing in `src/sapi/` (the class factory, registry helpers,
+  voice tokens and token enumerator) was adapted from
+  [gozaltech/BstSpeech-sapi](https://github.com/gozaltech/BstSpeech-sapi); the
+  files are listed in [NOTICE.md](NOTICE.md).
+- Apart from that plumbing, the C++ engine, SAPI5 driver, settings utility,
+  installer and tests in this repository were written for this project.
 
-No overall licence is asserted here, because the provenance of the Python
-reference is unknown. Treat this as a preservation and accessibility project.
+The settings utility (`src/config/`), the driver's logging, path and settings
+code (`src/sapi/sam_log.*`, `src/sapi/sam_paths.*`, `src/sapi/sam_settings.*`),
+the installer (`installer/`), the tools and tests (`tools/`) and the build
+scripts are licensed under the MIT License (see [LICENSE](LICENSE)).
+
+The SAM-derived material is not covered by that licence, and no licence is
+claimed for it here, because the provenance of the Python reference is unknown.
+That is the Python implementation in `bin/` and what is ported or generated from
+it: the C++ engine in `src/engine/` (its source files describe it as a port of
+the Python implementation) and the engine tables in `src/engine/sam_tables.cpp`,
+generated from the Python tables. The CMU Pronouncing Dictionary in
+`bin/cmudict.txt` and the SAPI5 plumbing files listed in
+[NOTICE.md](NOTICE.md) are not covered either. Treat this as a preservation and
+accessibility project.
